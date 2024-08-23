@@ -1,5 +1,5 @@
 const postgre = require('../database')
-const bookController = {
+const marketController = {
     getAll: async(req, res) => {
         try {
             const { rows } = await postgre.query("select * from market")
@@ -24,4 +24,4 @@ const bookController = {
     }
 }    
 
-module.exports = bookController
+module.exports = marketController
