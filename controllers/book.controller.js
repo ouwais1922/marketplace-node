@@ -8,20 +8,20 @@ const bookController = {
             res.json({msg: error.msg})
         }
     },
-    create: async(req, res) => {
+    create: async (req, res) => {
         try {
-            const { name, price } = req.body
-
-            const sql = 'INSERT INTO market(name, price) VALUES($1, $2) RETURNING *'
-
-            const { rows } = await postgre.query(sql, [name, price])
-
-            res.json({msg: "OK", data: rows[0]})
-
+            const { sellerName, contactName, contactEmail, vatNumber, managerChanel } = req.body;
+    
+            const sql = 'INSERT INTO market(sellerName, contactName, contactEmail, vatNumber, managerChanel) VALUES($1, $2, $3, $4, $5) RETURNING *';
+    
+            const { rows } = await postgre.query(sql, [sellerName, contactName, contactEmail, vatNumber, managerChanel]);
+    
+            res.json({ msg: "OK", data: rows[0] });
+    
         } catch (error) {
-            res.json({msg: error.msg})
+            res.status(500).json({ msg: error.message });
         }
-    },
-}
+    }
+}    
 
 module.exports = bookController
